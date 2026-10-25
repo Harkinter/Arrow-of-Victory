@@ -1,6 +1,5 @@
-using System;
 using UnityEngine;
-using UnityEngine.Windows;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Basic character controller based on "CharacterController" component
@@ -13,13 +12,13 @@ public class Move : MonoBehaviour
 
     // Component dependencies
     public CharacterController character;
-
     // Variables
     private float gravityAcceleration; // Rate of falling increases while remaining ungrounded
 
-    private void Update()
+    public void Movement(Vector3 direction)
     {
-        character.Move(speed * Time.deltaTime * Vector3.right);
+        // Move the character by vertical and horizontal input
+        character.Move(speed * Time.deltaTime * direction);
         if (character.isGrounded) 
         { 
             gravityAcceleration = 1f;

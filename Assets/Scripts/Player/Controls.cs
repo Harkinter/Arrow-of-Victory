@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Controls : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class Controls : MonoBehaviour
     }
     private void Update()
     {
-        Vector2 moveDir = input.Player.Move.ReadValue<Vector2>();
-        move.Movement(new Vector3(moveDir.x, 0, moveDir.y));
+        Vector2 dir = input.Player.Move.ReadValue<Vector2>().normalized;
+        move.Movement(new Vector3(dir.x, 0, dir.y));
     }
 }

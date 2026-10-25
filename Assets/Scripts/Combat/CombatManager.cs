@@ -1,22 +1,24 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    // TODO: Implement combat entities
-    public List<Character> Enemy = new(); // Reference list for enemies in battle
-    public List<Character> Allies = new(); // Reference list for allies in battle
-    public List<Character> TurnRotation = new(); // Reference list for rotation of turns
+    public List<Combatant> turnRotation = new(); // Rotation of turn attackers
+    private int orderPos;
     
-    public void TurnAccess()
+    public void SelectForTurn()
     {
-
-    }
-    public void UpdateTurns()
-    {
-        foreach (Character character in TurnRotation) 
-        { 
-
+        if (orderPos > turnRotation.Count)
+        {
+            orderPos = 0;
+            
         }
+        turnRotation[orderPos].TurnAction();
+        orderPos++;
+    }
+    public void UpdateRotation()
+    {
+        turnRotation.OrderBy(o => o.initiative);
     }
 }

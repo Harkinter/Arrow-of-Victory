@@ -1,15 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Action : MonoBehaviour
+[RequireComponent(typeof(Combatant))]
+public class Action : MonoBehaviour
 {
+    private void Awake()
+    {
+        owner = GetComponent<Combatant>();
+    }
     public Combatant owner;
-    public Targetable target = Targetable.enemy; // Target selection
-    public bool aoe = false; // Target all applicable targets
-    public abstract void Act(Combatant targeted);
+    public List<Combatant> targets = new(4); // Pre-emptive capacity for usual maximum
+    public virtual void Act()
+    {
+        // TODO: Add UI logic here
+    }
 }
 
-public enum Targetable
+public class Damage : Action
 {
-    ally,
-    enemy
+    [SerializeField] private int damage = 0;
+    public override void Act()
+    {
+        foreach (Combatant target in targets)
+        {
+            target.TakeDamage(damage);
+        }
+    }
+}
+
+public class Restore : Action
+{
+    // Technically also "true damage" if made negative
+    [SerializeField] private int healing = 0;
+    public override void Act()
+    {
+        foreach (Combatant target in targets)
+        {
+            target.TakeHealing(healing);
+        }
+    }
 }

@@ -1,9 +1,10 @@
-using UnityEngine;
-
 public class Attack : Action
 {
-    public override void Act(Combatant targeted)
+    public override void Act()
     {
-        targeted.TakeDamage(owner.baseDamage);
+        foreach (Combatant target in targets)
+        {
+            target.TakeDamage(owner.baseDamage);
+        }
     }
 }

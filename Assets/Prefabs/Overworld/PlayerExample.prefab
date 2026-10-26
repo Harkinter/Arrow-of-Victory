@@ -99,9 +99,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2024221920305322492}
-  - component: {fileID: 3152971849376102468}
-  - component: {fileID: 5640637875341832858}
   - component: {fileID: 2252698690199380284}
+  - component: {fileID: 5640637875341832858}
+  - component: {fileID: 77640116192203653}
+  - component: {fileID: 3152971849376102468}
   - component: {fileID: 6705355111674955280}
   m_Layer: 0
   m_Name: PlayerExample
@@ -127,6 +128,67 @@ Transform:
   - {fileID: 5928804632321951992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2252698690199380284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179710490319297477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1e5e6ac7de8674eb318e499e5654fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Controls
+  move: {fileID: 5640637875341832858}
+--- !u!114 &5640637875341832858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179710490319297477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099286fc7113a0d46bd664216042a6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Move
+  moveAcceleration: 100
+  maxMoveSpeed: 10
+  groundFriction: 40
+  hoverHeight: 0.8
+  probeStartHeight: 1
+  probeDistance: 0.5
+  hoverStrength: 80
+  hoverDamping: 24
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &77640116192203653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179710490319297477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911737e4c61bb0f44b1d6791887d1434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Combatant
+  Name: Player
+  maxHealth: 100
+  baseDamage: 10
+  baseArmor: 2
+  initiative: 4
+  currentHealth: 100
+  actions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &3152971849376102468
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,42 +216,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &5640637875341832858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5179710490319297477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099286fc7113a0d46bd664216042a6df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Move
-  moveAcceleration: 100
-  maxMoveSpeed: 10
-  groundFriction: 40
-  hoverHeight: 0.8
-  probeStartHeight: 1
-  probeDistance: 0.5
-  hoverStrength: 80
-  hoverDamping: 24
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &2252698690199380284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5179710490319297477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1e5e6ac7de8674eb318e499e5654fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Controls
-  move: {fileID: 5640637875341832858}
 --- !u!65 &6705355111674955280
 BoxCollider:
   m_ObjectHideFlags: 0

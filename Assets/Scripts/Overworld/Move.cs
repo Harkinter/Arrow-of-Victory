@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
@@ -19,6 +20,10 @@ public class Move : MonoBehaviour
     private Collider bodyCollider;
     private Vector3 movementInput;
 
+    // Animator for controlling animations
+    public Animator anim;
+    public int facingDirection = 1;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody>();
@@ -29,6 +34,32 @@ public class Move : MonoBehaviour
     {
         dir.y = 0f;
         movementInput = Vector3.ClampMagnitude(dir, 1f);
+    }
+
+    void HandleAnimations()
+    {
+        anim.SetBool("isIdle", Mathf.Abs(movementInput.x) < 0.1f && Mathf.Abs(movementInput.z) < 0.1f);
+        anim.SetBool("isWalkingX", Mathf.Abs(movementInput.x) > 0.1f);
+        anim.SetBool("isWalkingUp", movementInput.z > 0.1f);
+        anim.SetBool("isWalkingDown", movementInput.z < -0.1f);
+    }
+    void Flip()
+    {
+        if(movementInput.x > 0.1f)
+        {
+            facingDirection = 1;
+        }
+        else if (movementInput.x < -0.1f)
+        {
+            facingDirection = -1;
+        }
+        transform.localScale = new Vector3(facingDirection, 1f, 1f);
+    }
+
+    void Update()
+    {
+        Flip();
+        HandleAnimations();
     }
 
     private void FixedUpdate()

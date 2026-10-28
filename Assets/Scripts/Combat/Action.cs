@@ -15,28 +15,3 @@ public class Action : MonoBehaviour
         // TODO: Add UI logic here
     }
 }
-
-public class Damage : Action
-{
-    [SerializeField] private int damage = 0;
-    public override void Act()
-    {
-        foreach (Combatant target in targets)
-        {
-            target.TakeDamage(damage);
-        }
-    }
-}
-
-public class Restore : Action
-{
-    // Technically also "true damage" if made negative
-    [SerializeField] private int healing = 0;
-    public override void Act()
-    {
-        foreach (Combatant target in targets)
-        {
-            target.TakeHealing(healing);
-        }
-    }
-}

@@ -6,6 +6,8 @@ public class Combatant : Character
     public int baseDamage = 0;
     public int baseArmor = 0;
     public int initiative = 0;
+    public Faction side = Faction.player;
+    public ITurn turnInterface; // Used to connect to either player control or code-based intelligence
 
     [HideInInspector] public int currentHealth = 0;
 
@@ -28,9 +30,10 @@ public class Combatant : Character
         if (currentHealth + heal > maxHealth) { currentHealth = maxHealth; } // No overheal
         else { currentHealth += heal; }
     }
+}
 
-    public virtual void TurnAction()
-    {
-        Debug.Log("Not implemented");
-    }
+public enum Faction
+{
+    player,
+    foe
 }

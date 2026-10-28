@@ -1,16 +1,18 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Move))]
 public class Controls : MonoBehaviour
 {
     // Required components
-    public Move move;
+    private Move move;
 
     // Private values
     private InputSystem_Actions input; // The entire input system
-    private void Start()
+    private void Awake()
     {
         input = new();
         input.Enable();
+        move = GetComponent<Move>();
     }
     private void Update()
     {

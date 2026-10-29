@@ -386,8 +386,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.44225603, y: 0.38407516, z: 0.19555598}
-  m_Center: {x: -0.0013044402, y: -0.021593064, z: 0.053091913}
+  m_Size: {x: 0.43590552, y: 0.49423108, z: 0.15318662}
+  m_Center: {x: 0.001870811, y: 0.009899482, z: 0.011772424}
 --- !u!54 &1091593343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869edcdc30841904d97f74ad335728bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMovement
-  speed: 4
+  speed: 3
 --- !u!114 &1091593346
 MonoBehaviour:
   m_ObjectHideFlags: 0

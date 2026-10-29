@@ -1,18 +1,17 @@
 using UnityEngine;
 
-public class Combatant : Character
+public class Combatant
 {
     public int maxHealth = 0;
     public int baseDamage = 0;
     public int baseArmor = 0;
     public int initiative = 0;
-    public Faction side = Faction.player;
-    public ITurn turnInterface; // Used to connect to either player control or code-based intelligence
-
-    [HideInInspector] public int currentHealth = 0;
-
+    public Faction faction = Faction.player;
     public Action[] actions = new Action[6];
 
+    public ITurn turnInterface; // Used to connect to either player control or code-based intelligence
+
+    public int currentHealth = 0;
     // Returns a percentage representation of health 
     public float HealthPercentage()
     {
@@ -25,15 +24,15 @@ public class Combatant : Character
         else { currentHealth -= damage - baseArmor; }
     }
 
-    public void TakeHealing(int heal)
+    public void TakeTrue(int amount)
     {
-        if (currentHealth + heal > maxHealth) { currentHealth = maxHealth; } // No overheal
-        else { currentHealth += heal; }
+        if (currentHealth + amount > maxHealth) { currentHealth = maxHealth; }
+        else { currentHealth += amount; }
     }
 }
 
 public enum Faction
 {
     player,
-    foe
+    enemy
 }

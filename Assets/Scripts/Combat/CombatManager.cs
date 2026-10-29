@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public static class CombatManager
+public class CombatManager : MonoBehaviour
 {
-    // Static to carry information between combat theather and overworld
-    public static List<Combatant> turnRotation = new();
-    private static int orderPos;
-    public static void SelectForTurn()
+    public static List<Combatant> combatants = new();
+    private int orderPos;
+    public void SelectForTurn()
     {
-        if (orderPos > turnRotation.Count)
+        if (orderPos > combatants.Count)
         {
             orderPos = 0;
         }
-        turnRotation[orderPos].turnInterface.TakeTurn();
+        combatants[orderPos].turnInterface.TakeTurn();
         orderPos++;
     }
-    public static void UpdateRotation()
+    public void UpdateRotation()
     {
-        turnRotation.OrderBy(o => o.initiative);
+        combatants.OrderBy(o => o.initiative);
     }
 }

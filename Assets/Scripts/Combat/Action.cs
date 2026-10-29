@@ -9,7 +9,6 @@ public class Action : MonoBehaviour
         owner = GetComponent<Combatant>();
     }
     public Combatant owner;
-    public List<Combatant> targets = new(4); // Pre-emptive capacity for usual maximum
     public virtual void Act()
     {
         // TODO: Add UI logic here

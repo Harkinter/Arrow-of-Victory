@@ -7,7 +7,7 @@ public class Controls : MonoBehaviour
     private Move move;
 
     // Private values
-    private InputSystem_Actions input; // The entire input system
+    private OverworldControl input; // The entire input system
     private void Awake()
     {
         input = new();

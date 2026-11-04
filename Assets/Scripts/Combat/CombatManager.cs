@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    public static List<Combatant> combatants = new();
-    private int orderPos;
-    public void SelectForTurn()
+    public List<EntityCombatant> inFight;
+
+    private int nextInOrder = 0;
+    public void NextTurn()
     {
-        if (orderPos > combatants.Count)
-        {
-            orderPos = 0;
-        }
-        combatants[orderPos].turnInterface.TakeTurn();
-        orderPos++;
+        if (nextInOrder > inFight.Count - 1) nextInOrder = 0;
+        
+        nextInOrder++;
     }
-    public void UpdateRotation()
+    public void RefreshInitiative()
     {
-        combatants.OrderBy(o => o.initiative);
+        inFight.OrderBy(o => o._baseCombatant._initiative);
+    }
+
+    private void BeginTurn(EntityCombatant activeCombatant)
+    {
+        // TODO : Implement combat controls for AI and Player
     }
 }

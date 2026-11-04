@@ -1,5 +1,4 @@
 
-using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 
@@ -12,17 +11,11 @@ public class Move : MonoBehaviour
     [SerializeField] private float hoverHeight = 0.15f;
     [SerializeField] private float probeStartHeight = 0.25f;
     [SerializeField] private float probeDistance = 0.5f;
-    [SerializeField] private float hoverStrength = 80f;
-    [SerializeField] private float hoverDamping = 12f;
     [SerializeField] private LayerMask groundLayers = ~0;
 
     private Rigidbody body;
     private Collider bodyCollider;
     private Vector3 movementInput;
-
-    // Animator for controlling animations
-    public Animator anim;
-    public int facingDirection = 1;
 
     private void Awake()
     {
@@ -36,32 +29,6 @@ public class Move : MonoBehaviour
         movementInput = Vector3.ClampMagnitude(dir, 1f);
     }
 
-    void HandleAnimations()
-    {
-        anim.SetBool("isIdle", Mathf.Abs(movementInput.x) < 0.1f && Mathf.Abs(movementInput.z) < 0.1f);
-        anim.SetBool("isWalkingX", Mathf.Abs(movementInput.x) > 0.1f);
-        anim.SetBool("isWalkingUp", movementInput.z > 0.1f);
-        anim.SetBool("isWalkingDown", movementInput.z < -0.1f);
-    }
-    void Flip()
-    {
-        if(movementInput.x > 0.1f)
-        {
-            facingDirection = 1;
-        }
-        else if (movementInput.x < -0.1f)
-        {
-            facingDirection = -1;
-        }
-        transform.localScale = new Vector3(facingDirection, 1f, 1f);
-    }
-
-    void Update()
-    {
-        Flip();
-        HandleAnimations();
-    }
-
     private void FixedUpdate()
     {
         bool grounded = TryGetGround(out RaycastHit groundHit, out float targetDistance);
@@ -69,11 +36,10 @@ public class Move : MonoBehaviour
         if (grounded)
         {
             float distanceError = targetDistance - groundHit.distance;
-            float verticalSpeed = Vector3.Dot(body.linearVelocity, Vector3.up);
-            float hoverAcceleration = -Vector3.Dot(Physics.gravity, Vector3.up)
-                + distanceError * hoverStrength
-                - verticalSpeed * hoverDamping;
-            body.AddForce(Vector3.up * hoverAcceleration, ForceMode.Acceleration);
+            Vector3 velocity = body.linearVelocity;
+            velocity.y = 0f;
+            body.linearVelocity = velocity;
+            body.MovePosition(body.position + Vector3.up * distanceError);
         }
 
         Vector3 moveDirection = movementInput;

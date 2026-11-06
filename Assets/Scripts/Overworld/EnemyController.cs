@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemyMovement movement;
-    public Transform player;
+    public Move _move;
+    public Transform _player;
 
     private void FixedUpdate()
     {
-        movement.Move(player);
+        _move.Movement((_player.position - transform.position).normalized);
     }
 
 }

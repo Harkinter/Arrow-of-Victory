@@ -1,8 +1,9 @@
+using UnityEngine;
+
 public enum ActionType
 {
     attack,
-    heal,
-    damage
+    heal
 }
 
 public enum Targetable
@@ -11,7 +12,8 @@ public enum Targetable
     ally
 }
 
-public struct Action
+[CreateAssetMenu(fileName = "Action", menuName = "Scriptable/Action", order = 2)]
+public class Action : ScriptableObject
 {
     public string _name;
     public int _power;
